@@ -1,0 +1,1 @@
+let services = [ Dapps.transfer ]

@@ -1,0 +1,4 @@
+(library
+ (name server)
+ (public_name tezos-dapps-examples.server)
+ (libraries nightmare.service tyxml dream nightmare-dream nightmare-tyxml))
