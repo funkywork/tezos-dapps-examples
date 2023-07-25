@@ -37,21 +37,48 @@ body {
 
 #spa-loading > span:first-child {
   font-size: 160%;
-  margin-right: 6px;
-  animation: rotation 4s infinite linear;
+  margin-right: 4px;
+  animation: rotation 1s infinite linear;
   font-family: var(--sans-serif);
 }
 
 #spa-loading > span:last-child {
   color: #888;
+  font-size: 80%;
 }
 
-#transfer-app {
-  background-color: #111;
-  color: #fff;
+#connect-app {
   width: 100%;
   max-width: 640px;
-  padding: 8px;
+  padding: 16px;
+}
+
+#connect-app .btn {
+  padding: 6px 12px;
+  border: 0 solid transparent;
+  font-family: var(--mono);
+  cursor: pointer;
+}
+
+#connect-app .black-container {
+  background-color: #111;
+  color: #fff;
+}
+
+#connect-app header > h1 {
+  margin: 0;
+  font-size: 200%;
+  font-weight: 700;
+}
+
+#connect-app header > h2 {
+  margin: 0;
+  font-size: 100%;
+  font-weight: 700;
+}
+
+#connect-app main {
+  margin-top: 32px;
 }
 
 @keyframes rotation {

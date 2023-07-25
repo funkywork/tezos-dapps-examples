@@ -1,1 +1,1 @@
-let services = [ Dapps.transfer ]
+let services = [ Dapps.connect ]

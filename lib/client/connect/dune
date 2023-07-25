@@ -1,0 +1,6 @@
+(library
+ (name dapp_connect)
+ (modes byte)
+ (preprocess
+  (pps js_of_ocaml-ppx))
+ (libraries nightmare_js nightmare_js-vdom yourbones yourbones_js-beacon))

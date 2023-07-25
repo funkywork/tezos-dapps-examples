@@ -1,8 +1,8 @@
-let transfer : Nightmare_dream.service =
+let connect : Nightmare_dream.service =
   Nightmare_service.Service.straight
-    ~endpoint:Endpoint.transfer
+    ~endpoint:Endpoint.connect
     (Template.spa
-       ~app_id:"transfer-app"
-       ~title:"Transfer - an example dApp that performs a transfer"
-       [])
+       ~app_id:"connect-app"
+       ~title:"A simple dApp that demonstrates how to sync Wallet with dApp"
+       [ "tezos_dapps_examples.mountConnect('connect-app')" ])
 ;;

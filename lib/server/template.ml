@@ -29,7 +29,7 @@ let spa ?(app_id = "application") ~title suspends _request =
               ~a:[ a_id app_id ]
               [ div
                   ~a:[ a_id "spa-loading" ]
-                  [ span [ txt "✼" ]; span [ txt "loading" ] ]
+                  [ span [ txt "❖" ]; span [ txt "loading" ] ]
               ]
           ; script (txt script_content)
           ]

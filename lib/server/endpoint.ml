@@ -1,4 +1,4 @@
 open Nightmare_service.Endpoint
 
 let priv () = get (~/"priv" /: string)
-let transfer () = get (~/"dapps" / "transfer")
+let connect () = get (~/"dapps" / "connect")
