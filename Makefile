@@ -40,6 +40,7 @@ pinned-deps: local-deps
 	opam install nightmare_js-vdom -y
 	opam install yourbones -y
 	opam install yourbones-ppx -y
+	opam install yourbones_js -y
 	opam install yourbones_js-beacon -y
 
 deps: pinned-deps

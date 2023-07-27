@@ -29,6 +29,7 @@
     ;; Yourbones deps
     (yourbones :pinned)
     (yourbones-ppx :pinned)
+    (uourbones_js :pinned)
     (yourbones_js-beacon :pinned)
 
     ;; Dev setup

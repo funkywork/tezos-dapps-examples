@@ -1,6 +1,10 @@
 type state =
   | Not_connected
-  | Connected of { account : Beacon.Account_info.t }
+  | Connected of
+      { account : Beacon.Account_info.t
+      ; balance : Yourbones.Tez.t
+      ; head : Yourbones.Block_header.t option
+      }
 
 type t =
   { state : state
@@ -8,22 +12,31 @@ type t =
   }
 
 let not_connected = { errors = []; state = Not_connected }
-let connected ~account = { errors = []; state = Connected { account } }
+
+let connected ~account ~balance =
+  { errors = []; state = Connected { account; balance; head = None } }
+;;
 
 let update_not_connected model = function
   | Message.Command Ask_for_wallet_sync ->
     Vdom.return
       model
       ~c:[ Command.ask_wallet_sync Message.wallet_synced Message.with_error ]
-  | Message.Command_result (Wallet_synced { account_info }) ->
-    Vdom.return (connected ~account:account_info)
+  | Message.Command_result (Wallet_synced { account_info; balance }) ->
+    let address = account_info.address in
+    Vdom.return
+      ~c:[ Command.ask_stream_head address Message.new_head ]
+      (connected ~account:account_info ~balance)
   | _ -> Vdom.return model
 ;;
 
-let update_connected model = function
+let update_connected model account = function
   | Message.Command Ask_for_wallet_unsync ->
     Vdom.return model ~c:[ Command.ask_wallet_unsync Message.wallet_unsynced ]
   | Message.Command_result Wallet_unsynced -> Vdom.return not_connected
+  | Message.Command_result (New_head { balance; head }) ->
+    Vdom.return
+      { model with state = Connected { account; balance; head = Some head } }
   | _ -> Vdom.return model
 ;;
 
@@ -33,13 +46,7 @@ let update ({ state; errors } as model) = function
   | msg ->
     (match state with
      | Not_connected -> update_not_connected model msg
-     | Connected _ -> update_connected model msg)
+     | Connected { account; _ } -> update_connected model account msg)
 ;;
 
-let init dapp_client : (t * Message.t Vdom.Cmd.t) Lwt.t =
-  let open Lwt.Syntax in
-  let* active_account = Beacon.Dapp_client.get_active_account dapp_client in
-  match active_account with
-  | None -> not_connected |> Vdom.return |> Lwt.return
-  | Some account -> connected ~account |> Vdom.return |> Lwt.return
-;;
+let init : t * Message.t Vdom.Cmd.t = Vdom.return not_connected
