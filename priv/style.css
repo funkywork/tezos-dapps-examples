@@ -81,6 +81,10 @@ body {
   margin-top: 32px;
 }
 
+#connect-app main > div {
+  margin-bottom: 32px;
+}
+
 @keyframes rotation {
   from {
     transform: rotate(0deg);

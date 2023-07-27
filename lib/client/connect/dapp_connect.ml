@@ -3,7 +3,7 @@ open Nightmare_js
 let dapp_client () = Beacon.Dapp_client.make ~name:"connect-v1" ()
 
 let app client =
-  let () = Command.register () in
+  let () = Command.register client in
   let open Lwt.Syntax in
   let update = Model.update in
   let view = View.index in
