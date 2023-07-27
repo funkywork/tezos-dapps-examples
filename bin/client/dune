@@ -1,0 +1,12 @@
+(executable
+ (name client)
+ (modes js)
+ (preprocess
+  (pps js_of_ocaml-ppx))
+ (js_of_ocaml
+  (flags :standard))
+ (promote
+  (until-clean)
+  (into "../../priv")
+  (only client.bc.js))
+ (libraries nightmare_js dapp_connect))
